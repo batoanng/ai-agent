@@ -74,6 +74,7 @@ Current bundled agents:
 | `code-architect` | Feature-level implementation blueprints based on existing codebase patterns. |
 | `code-reviewer` | General code review for correctness, maintainability, and security. |
 | `code-simplifier` | Behavior-preserving simplification and cleanup of recently changed code. |
+| `database-reviewer` | Cross-database review for PostgreSQL, MySQL, and MongoDB with one consistent checklist for performance, schema, security, and operations. |
 | `tdd-guide` | Tests-first implementation guidance and coverage discipline. |
 | `typescript-reviewer` | TypeScript/JavaScript-focused review with emphasis on type safety and async correctness. |
 
