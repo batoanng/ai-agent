@@ -1,0 +1,28 @@
+{
+  "name": "@batoanng/ai",
+  "version": "0.1.0",
+  "description": "Install reusable AI coding skills and agents into a project.",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "bin": {
+    "agents": "./bin/agents.js",
+    "skills": "./bin/skills.js"
+  },
+  "files": [
+    "agents",
+    "bin",
+    "config.toml",
+    "skills",
+    "src",
+    "README.md",
+    "SPECS.md"
+  ],
+  "scripts": {
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

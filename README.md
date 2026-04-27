@@ -1,37 +1,109 @@
 # ai-agent
 
-`ai-agent` is a small prompt package that bundles reusable **skills** and **agents** for code-oriented AI workflows.
+`ai-agent` is a prompt package for installing reusable AI coding **skills** and **agents** into a project.
 
-The repository is organized so you can keep higher-level agent personas separate from narrower, task-specific skills:
+- Use a **skill** for a focused workflow, such as removing unnecessary React Effects, debugging TypeScript, or applying TDD.
+- Use an **agent** for a broader working role, such as code review, architecture, or simplification.
+- Install one item when a project needs a specific workflow. Install all items when bootstrapping a project with the full prompt toolkit.
 
-- `skills/` contains focused workflow packs with a `SKILL.md` entrypoint.
-- `skills/<group>/<skill>/agents/` contains provider-specific skill configs, currently `openai.yaml` and `claude.md`.
-- `skills/<group>/<skill>/references/` contains optional supporting material used by the skill.
-- `agents/` contains standalone agent guides for broader roles such as architecture, review, and simplification.
-- `config.toml` contains the package-level execution limits.
+## Install With `@batoanng/ai`
 
-## Package Structure
+The package exposes separate `skills` and `agents` commands through the `@batoanng/ai` npm package:
 
-```text
-.
-├── agents/
-├── config.toml
-├── skills/
-│   ├── general/
-│   └── react/
-└── README.md
+```bash
+npx -p @batoanng/ai skills add <skill-slug>
+npx -p @batoanng/ai skills add -a
+npx -p @batoanng/ai agents add <agent-slug>
+npx -p @batoanng/ai agents add -a
 ```
 
-## Skills
+## Installing Skills
 
-Skills are the narrowest unit in the package. Each skill describes:
+Install one skill into the current project:
 
-- when to use it
-- the workflow to follow
-- decision rules and guardrails
-- the expected output after the task is complete
+```bash
+npx -p @batoanng/ai skills add react-avoid-use-effect
+```
 
-Current bundled skills:
+Install every bundled skill:
+
+```bash
+npx -p @batoanng/ai skills add -a
+```
+
+Skills are installed to:
+
+```text
+.codex/skills/<skill-slug>/
+```
+
+Each skill install includes `SKILL.md`, any supporting `references/`, and one provider-specific reference file.
+
+### Provider Selection
+
+Skill installs default to OpenAI:
+
+```bash
+npx -p @batoanng/ai skills add react-avoid-use-effect
+```
+
+The CLI logs the selected provider on every skill install:
+
+```text
+Using provider: openai
+```
+
+To install the Claude reference instead:
+
+```bash
+npx -p @batoanng/ai skills add react-avoid-use-effect --provider claude
+```
+
+Available providers:
+
+| Provider | Included skill reference |
+| --- | --- |
+| `openai` | `agents/openai.yaml` |
+| `claude` | `agents/claude.md` |
+
+## Installing Agents
+
+Install one standalone agent:
+
+```bash
+npx -p @batoanng/ai agents add code-reviewer
+```
+
+Install every bundled agent:
+
+```bash
+npx -p @batoanng/ai agents add -a
+```
+
+Agents are installed to:
+
+```text
+.claude/agents/<agent-slug>.md
+```
+
+Standalone agents are provider-independent. If `--provider` is passed to an agent command, the install still writes the same agent file and logs that provider selection is ignored.
+
+## Updating Existing Installs
+
+Existing installed skills and agents are skipped by default so local edits are preserved:
+
+```text
+Skipped react-avoid-use-effect: already exists at .codex/skills/react-avoid-use-effect. Use --force to replace it.
+```
+
+Use `--force` to replace an existing install with the packaged version:
+
+```bash
+npx -p @batoanng/ai skills add react-avoid-use-effect --force
+npx -p @batoanng/ai agents add code-reviewer --force
+```
+
+## Bundled Skills
 
 | Skill | Group | Purpose |
 | --- | --- | --- |
@@ -41,39 +113,11 @@ Current bundled skills:
 | `structure-types` | `general` | Organize and scale TypeScript types and interfaces by domain and reuse boundary. |
 | `test-driven-development` | `general` | Drive implementation through a red-green-refactor workflow. |
 | `typescript-debugging` | `general` | Debug TypeScript and JavaScript issues with verified source maps, intentional instrumentation, and root-cause-first fixes. |
-| `use-types-structures` | `general` | Prefer existing data structures from the [`@batoanng/types` npm package](https://www.npmjs.com/package/@batoanng/types) and justify complexity choices. |
+| `use-types-structures` | `general` | Prefer existing data structures from the `@batoanng/types` npm package and justify complexity choices. |
 | `extract-custom-hook` | `react` | Refactor duplicated React stateful logic into a focused custom Hook. |
 | `react-avoid-use-effect` | `react` | Remove unnecessary React Effects and replace them with React-first patterns. |
 
-### Skill Layout
-
-Each skill folder follows the same shape:
-
-```text
-skills/<group>/<skill>/
-├── SKILL.md
-├── agents/
-│   ├── claude.md
-│   └── openai.yaml
-└── references/
-```
-
-- `SKILL.md` is the canonical instruction file.
-- `agents/openai.yaml` exposes OpenAI-facing interface metadata such as display name and default prompt.
-- `agents/claude.md` stores a Claude Code subagent definition as Markdown with YAML frontmatter and the skill prompt body.
-- `references/` stores deeper guidance that the skill can point to without bloating the main instructions.
-
-Example:
-
-- [skills/react/react-avoid-use-effect/SKILL.md](/Users/batoannguyen/Downloads/PROJECTS/personal/ai-agent/skills/react/react-avoid-use-effect/SKILL.md)
-- [skills/react/react-avoid-use-effect/agents/claude.md](/Users/batoannguyen/Downloads/PROJECTS/personal/ai-agent/skills/react/react-avoid-use-effect/agents/claude.md)
-- [skills/react/react-avoid-use-effect/agents/openai.yaml](/Users/batoannguyen/Downloads/PROJECTS/personal/ai-agent/skills/react/react-avoid-use-effect/agents/openai.yaml)
-
-## Agents
-
-Agents are broader role definitions than skills. They are useful when the model should adopt a persistent perspective across a larger task instead of applying one narrow workflow.
-
-Current bundled agents:
+## Bundled Agents
 
 | Agent | Purpose |
 | --- | --- |
@@ -86,34 +130,58 @@ Current bundled agents:
 | `typescript-debugger` | Debug TypeScript and JavaScript failures through reproduction, source-map validation, targeted instrumentation, and verified fixes. |
 | `typescript-reviewer` | TypeScript/JavaScript-focused review with emphasis on type safety and async correctness. |
 
-See the bundled guides in [agents](/Users/batoannguyen/Downloads/PROJECTS/personal/ai-agent/agents).
+## Package Layout
 
-## How Skills And Agents Fit Together
+```text
+.
+├── agents/
+├── bin/
+├── config.toml
+├── skills/
+│   ├── general/
+│   └── react/
+├── src/
+├── test/
+├── README.md
+└── SPECS.md
+```
 
-Use both layers together:
+Skill source folders follow this shape:
 
-- Pick an **agent** when you need a broad working mode such as review, architecture, or TDD guidance.
-- Pick a **skill** when you need a precise playbook for one coding problem.
-- Combine them when helpful. For example, a reviewer agent can apply `react-avoid-use-effect` while assessing a React change.
+```text
+skills/<group>/<skill>/
+├── SKILL.md
+├── agents/
+│   ├── claude.md
+│   └── openai.yaml
+└── references/
+```
 
-In practice:
+- `SKILL.md` is the canonical skill instruction file.
+- `agents/openai.yaml` is the OpenAI-facing skill reference.
+- `agents/claude.md` is the Claude-facing skill reference.
+- `references/` stores deeper supporting material used by the skill.
 
-1. Select the broad role from `agents/` if the task needs one.
-2. Apply one or more relevant skills from `skills/`.
-3. Follow the workflow in `SKILL.md`.
-4. Use any `references/` material only when the main skill file needs extra context.
+Standalone agent guides live in `agents/`.
 
 ## Configuration
 
-The package currently exposes two top-level settings in [config.toml](/Users/batoannguyen/Downloads/PROJECTS/personal/ai-agent/config.toml):
+The package currently includes top-level execution limits in `config.toml`:
 
 ```toml
 max_threads = 4
 max_depth = 1
 ```
 
-- `max_threads` limits parallel work.
-- `max_depth` limits delegation depth.
+## Development
+
+Run the test suite:
+
+```bash
+npm test
+```
+
+See `SPECS.md` for the technical CLI contract.
 
 ## Extending The Package
 
