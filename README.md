@@ -36,6 +36,7 @@ Current bundled skills:
 | Skill | Group | Purpose |
 | --- | --- | --- |
 | `extract-enum` | `general` | Refactor repeated domain literals into a shared string enum when runtime reuse matters. |
+| `purposeful-logging` | `general` | Add, review, and reduce logs so each line has diagnostic value and the right signals become metrics or spans. |
 | `structure-types` | `general` | Organize and scale TypeScript types and interfaces by domain and reuse boundary. |
 | `test-driven-development` | `general` | Drive implementation through a red-green-refactor workflow. |
 | `typescript-debugging` | `general` | Debug TypeScript and JavaScript issues with verified source maps, intentional instrumentation, and root-cause-first fixes. |
