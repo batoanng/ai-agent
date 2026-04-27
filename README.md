@@ -38,6 +38,7 @@ Current bundled skills:
 | `extract-enum` | `general` | Refactor repeated domain literals into a shared string enum when runtime reuse matters. |
 | `structure-types` | `general` | Organize and scale TypeScript types and interfaces by domain and reuse boundary. |
 | `test-driven-development` | `general` | Drive implementation through a red-green-refactor workflow. |
+| `typescript-debugging` | `general` | Debug TypeScript and JavaScript issues with verified source maps, intentional instrumentation, and root-cause-first fixes. |
 | `use-types-structures` | `general` | Prefer existing data structures from `@batoanng/types` and justify complexity choices. |
 | `react-avoid-use-effect` | `react` | Remove unnecessary React Effects and replace them with React-first patterns. |
 
@@ -76,6 +77,7 @@ Current bundled agents:
 | `code-simplifier` | Behavior-preserving simplification and cleanup of recently changed code. |
 | `database-reviewer` | Cross-database review for PostgreSQL, MySQL, and MongoDB with one consistent checklist for performance, schema, security, and operations. |
 | `tdd-guide` | Tests-first implementation guidance and coverage discipline. |
+| `typescript-debugger` | Debug TypeScript and JavaScript failures through reproduction, source-map validation, targeted instrumentation, and verified fixes. |
 | `typescript-reviewer` | TypeScript/JavaScript-focused review with emphasis on type safety and async correctness. |
 
 See the bundled guides in [agents](/Users/batoannguyen/Downloads/PROJECTS/personal/ai-agent/agents).
