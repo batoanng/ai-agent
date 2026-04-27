@@ -1,11 +1,13 @@
 ---
 name: use-types-structures
-description: Use when implementing or reviewing a new feature, helper, algorithm, or function in this repo and data-structure choice or complexity matters. Before adding custom storage logic, check `@batoanng/types` for an existing structure to reuse. Call out the expected time complexity of the new function and justify the chosen structure.
+description: Use when implementing or reviewing a new feature, helper, algorithm, or function in this repo and data-structure choice or complexity matters. Before adding custom storage logic, check the `@batoanng/types` npm package (`https://www.npmjs.com/package/@batoanng/types`) for an existing structure to reuse. Call out the expected time complexity of the new function and justify the chosen structure.
 ---
 
 # Use Types Structures
 
-Before implementing a new feature or function in this repo, check whether `@batoanng/types` already provides the right data structure. Prefer reusing that package over ad hoc arrays, objects, or one-off storage utilities when the behavior matches.
+Before implementing a new feature or function in this repo, check whether the `@batoanng/types` npm package already provides the right data structure. Prefer reusing that package over ad hoc arrays, objects, or one-off storage utilities when the behavior matches.
+
+Package reference: `https://www.npmjs.com/package/@batoanng/types`
 
 ## Workflow
 

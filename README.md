@@ -41,7 +41,7 @@ Current bundled skills:
 | `structure-types` | `general` | Organize and scale TypeScript types and interfaces by domain and reuse boundary. |
 | `test-driven-development` | `general` | Drive implementation through a red-green-refactor workflow. |
 | `typescript-debugging` | `general` | Debug TypeScript and JavaScript issues with verified source maps, intentional instrumentation, and root-cause-first fixes. |
-| `use-types-structures` | `general` | Prefer existing data structures from `@batoanng/types` and justify complexity choices. |
+| `use-types-structures` | `general` | Prefer existing data structures from the [`@batoanng/types` npm package](https://www.npmjs.com/package/@batoanng/types) and justify complexity choices. |
 | `extract-custom-hook` | `react` | Refactor duplicated React stateful logic into a focused custom Hook. |
 | `react-avoid-use-effect` | `react` | Remove unnecessary React Effects and replace them with React-first patterns. |
 
