@@ -5,7 +5,7 @@
 The repository is organized so you can keep higher-level agent personas separate from narrower, task-specific skills:
 
 - `skills/` contains focused workflow packs with a `SKILL.md` entrypoint.
-- `skills/<group>/<skill>/agents/openai.yaml` contains skill-level UI metadata and default prompts.
+- `skills/<group>/<skill>/agents/` contains provider-specific skill configs, currently `openai.yaml` and `claude.md`.
 - `skills/<group>/<skill>/references/` contains optional supporting material used by the skill.
 - `agents/` contains standalone agent guides for broader roles such as architecture, review, and simplification.
 - `config.toml` contains the package-level execution limits.
@@ -37,6 +37,7 @@ Current bundled skills:
 | --- | --- | --- |
 | `extract-enum` | `general` | Refactor repeated domain literals into a shared string enum when runtime reuse matters. |
 | `purposeful-logging` | `general` | Add, review, and reduce logs so each line has diagnostic value and the right signals become metrics or spans. |
+| `solid-typescript` | `general` | Apply practical SOLID pressure tests to TypeScript design without adding ceremony. |
 | `structure-types` | `general` | Organize and scale TypeScript types and interfaces by domain and reuse boundary. |
 | `test-driven-development` | `general` | Drive implementation through a red-green-refactor workflow. |
 | `typescript-debugging` | `general` | Debug TypeScript and JavaScript issues with verified source maps, intentional instrumentation, and root-cause-first fixes. |
@@ -51,17 +52,20 @@ Each skill folder follows the same shape:
 skills/<group>/<skill>/
 ├── SKILL.md
 ├── agents/
+│   ├── claude.md
 │   └── openai.yaml
 └── references/
 ```
 
 - `SKILL.md` is the canonical instruction file.
-- `agents/openai.yaml` exposes lightweight interface metadata such as display name and default prompt.
+- `agents/openai.yaml` exposes OpenAI-facing interface metadata such as display name and default prompt.
+- `agents/claude.md` stores a Claude Code subagent definition as Markdown with YAML frontmatter and the skill prompt body.
 - `references/` stores deeper guidance that the skill can point to without bloating the main instructions.
 
 Example:
 
 - [skills/react/react-avoid-use-effect/SKILL.md](/Users/batoannguyen/Downloads/PROJECTS/personal/ai-agent/skills/react/react-avoid-use-effect/SKILL.md)
+- [skills/react/react-avoid-use-effect/agents/claude.md](/Users/batoannguyen/Downloads/PROJECTS/personal/ai-agent/skills/react/react-avoid-use-effect/agents/claude.md)
 - [skills/react/react-avoid-use-effect/agents/openai.yaml](/Users/batoannguyen/Downloads/PROJECTS/personal/ai-agent/skills/react/react-avoid-use-effect/agents/openai.yaml)
 
 ## Agents
@@ -116,8 +120,9 @@ To add a new skill:
 
 1. Create `skills/<group>/<skill>/SKILL.md`.
 2. Add `skills/<group>/<skill>/agents/openai.yaml`.
-3. Add `references/` only if the skill needs deeper source material.
-4. Document the new skill in this README.
+3. Add `skills/<group>/<skill>/agents/claude.md`.
+4. Add `references/` only if the skill needs deeper source material.
+5. Document the new skill in this README.
 
 To add a new standalone agent:
 
