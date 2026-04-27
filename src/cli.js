@@ -186,7 +186,7 @@ function installSkill(skill, options) {
     throw new Error(`Skill "${skill.slug}" does not include provider file agents/${providerFile}.`);
   }
 
-  const destination = path.join(options.cwd, ".codex", "skills", skill.slug);
+  const destination = path.join(options.cwd, skill.slug);
 
   if (pathExists(destination) && !options.force) {
     return {

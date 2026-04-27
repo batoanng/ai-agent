@@ -51,22 +51,24 @@ The agent slug is the filename without `.md`.
 
 ## Install Outputs
 
-Skill installs write to the current working directory:
+Skill installs write directly under the current working directory:
 
 ```text
-.codex/skills/<skill-slug>/
+<current-working-directory>/<skill-slug>/
 ├── SKILL.md
 ├── agents/
 │   └── openai.yaml OR claude.md
 └── references/
 ```
 
+The CLI does not search for, create, or target `.codex/skills`. To install into Codex's project-local skill layout, run the command from that directory.
+
 The selected provider controls only the file copied into `agents/`:
 
 | Provider | Source file | Destination file |
 | --- | --- | --- |
-| `openai` | `skills/<group>/<slug>/agents/openai.yaml` | `.codex/skills/<slug>/agents/openai.yaml` |
-| `claude` | `skills/<group>/<slug>/agents/claude.md` | `.codex/skills/<slug>/agents/claude.md` |
+| `openai` | `skills/<group>/<slug>/agents/openai.yaml` | `<cwd>/<slug>/agents/openai.yaml` |
+| `claude` | `skills/<group>/<slug>/agents/claude.md` | `<cwd>/<slug>/agents/claude.md` |
 
 Agent installs write to:
 

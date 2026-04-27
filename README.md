@@ -31,11 +31,13 @@ Install every bundled skill:
 npx -p @batoanng/ai skills add -a
 ```
 
-Skills are installed to:
+Skills are installed directly under the current folder:
 
 ```text
-.codex/skills/<skill-slug>/
+./<skill-slug>/
 ```
+
+To install into Codex's project-local skill folder, run the command from `.codex/skills`.
 
 Each skill install includes `SKILL.md`, any supporting `references/`, and one provider-specific reference file.
 
@@ -93,7 +95,7 @@ Standalone agents are provider-independent. If `--provider` is passed to an agen
 Existing installed skills and agents are skipped by default so local edits are preserved:
 
 ```text
-Skipped react-avoid-use-effect: already exists at .codex/skills/react-avoid-use-effect. Use --force to replace it.
+Skipped react-avoid-use-effect: already exists at ./react-avoid-use-effect. Use --force to replace it.
 ```
 
 Use `--force` to replace an existing install with the packaged version:

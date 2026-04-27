@@ -100,7 +100,7 @@ test("discovers bundled skills and agents", () => {
 
 test("installs one skill with the default OpenAI provider", async () => {
   const result = await runSkills(["add", "react-avoid-use-effect"]);
-  const skillDir = path.join(result.cwd, ".codex", "skills", "react-avoid-use-effect");
+  const skillDir = path.join(result.cwd, "react-avoid-use-effect");
 
   assert.equal(result.exitCode, 0);
   assert.match(result.stdout, /Using provider: openai/);
@@ -108,11 +108,12 @@ test("installs one skill with the default OpenAI provider", async () => {
   assert.ok(fs.existsSync(path.join(skillDir, "references", "you-might-not-need-an-effect.md")));
   assert.ok(fs.existsSync(path.join(skillDir, "agents", "openai.yaml")));
   assert.ok(!fs.existsSync(path.join(skillDir, "agents", "claude.md")));
+  assert.ok(!fs.existsSync(path.join(result.cwd, ".codex")));
 });
 
 test("installs one skill with the Claude provider", async () => {
   const result = await runSkills(["add", "react-avoid-use-effect", "--provider", "claude"]);
-  const skillDir = path.join(result.cwd, ".codex", "skills", "react-avoid-use-effect");
+  const skillDir = path.join(result.cwd, "react-avoid-use-effect");
 
   assert.equal(result.exitCode, 0);
   assert.match(result.stdout, /Using provider: claude/);
@@ -123,7 +124,7 @@ test("installs one skill with the Claude provider", async () => {
 
 test("installs all skills with -a", async () => {
   const result = await runSkills(["add", "-a"]);
-  const destinationRoot = path.join(result.cwd, ".codex", "skills");
+  const destinationRoot = result.cwd;
   const installed = fs.readdirSync(destinationRoot).sort();
 
   assert.equal(result.exitCode, 0);
@@ -172,7 +173,7 @@ test("skills binary rejects the old nested agent command", async () => {
 test("existing skill install is skipped unless forced", async () => {
   const cwd = createProjectDir();
   const first = await runSkills(["add", "extract-enum"], cwd);
-  const skillFile = path.join(cwd, ".codex", "skills", "extract-enum", "SKILL.md");
+  const skillFile = path.join(cwd, "extract-enum", "SKILL.md");
 
   assert.equal(first.exitCode, 0);
   fs.writeFileSync(skillFile, "local edit\n");
