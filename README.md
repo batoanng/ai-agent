@@ -109,6 +109,7 @@ npx -p @batoanng/ai agents add code-reviewer --force
 
 | Skill | Group | Purpose |
 | --- | --- | --- |
+| `backend-idempotency` | `general` | Design, implement, and review retry-safe backend operations that prevent duplicate side effects. |
 | `extract-enum` | `general` | Refactor repeated domain literals into a shared string enum when runtime reuse matters. |
 | `purposeful-logging` | `general` | Add, review, and reduce logs so each line has diagnostic value and the right signals become metrics or spans. |
 | `solid-typescript` | `general` | Apply practical SOLID pressure tests to TypeScript design without adding ceremony. |

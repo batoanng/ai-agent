@@ -66,10 +66,11 @@ test("discovers bundled skills and agents", () => {
   const skills = discoverSkills(packageRoot);
   const agents = discoverAgents(packageRoot);
 
-  assert.equal(skills.length, 9);
+  assert.equal(skills.length, 10);
   assert.deepEqual(
     skills.map((skill) => skill.slug),
     [
+      "backend-idempotency",
       "extract-enum",
       "purposeful-logging",
       "solid-typescript",

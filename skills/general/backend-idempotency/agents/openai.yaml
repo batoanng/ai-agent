@@ -1,0 +1,4 @@
+interface:
+  display_name: "Backend Idempotency"
+  short_description: "Prevent duplicate backend side effects"
+  default_prompt: "Use $backend-idempotency to design, implement, or review retry-safe backend operations with durable idempotency keys, atomic duplicate detection, cached results, and tests for concurrent retries and partial failures."
